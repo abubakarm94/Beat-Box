@@ -1,0 +1,15 @@
+<resources>
+
+    <style name="CustomTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:windowTitleSize">50dip</item>
+         <item name="android:actionBarStyle">@style/TranslucentActionBar</item>
+        <item name="android:windowActionBar">false</item>
+        
+        
+       
+    </style>
+
+   <style name="TranslucentActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+    <item name="android:background">@android:color/transparent</item>
+</style>
+</resources>
