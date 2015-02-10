@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="6dp"
+    android:background="@drawable/list_card"
+    >
+ 
+    
+    <com.parse.ParseImageView
+        android:id="@+id/photo"
+        android:layout_width="86dp"
+        android:layout_height="76dp"
+        
+       android:background="@drawable/temp"
+        android:paddingLeft="3dip"
+        android:paddingRight="3dip"
+        android:layout_margin="5dip"
+        android:adjustViewBounds="true" />
+    
+    
+      
+    <TextView 
+       android:layout_below="@id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add to Playlist"
+        android:padding="6dp"
+        android:id="@+id/addTo"
+        android:gravity="center"
+        android:background="#F6F7F9"
+        android:layout_alignParentBottom="true"
+        />
+     <View
+         android:layout_above="@id/addTo"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#666666" />
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/photo"
+        android:orientation="vertical"
+         >
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:singleLine="true"
+        android:text="Username"
+        android:paddingTop="5dp"
+        android:textStyle="bold" />
+    
+    <Button 
+        android:id="@+id/play"
+         android:layout_width="wrap_content"
+        android:layout_height="30dp"
+      android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="PLAY"
+        android:focusable="false"
+        android:paddingRight="20dp"
+        android:textStyle="bold"
+        android:textColor="@drawable/play_text_color"
+        android:background="@drawable/green_button"
+        android:gravity="center_vertical"
+        android:layout_gravity="center|right"
+        />
+    
+    <TextView
+        android:id="@+id/song_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="music title"
+        android:paddingTop="5dp"
+        />
+    
+	</LinearLayout>
+	
+    
+
+
+</RelativeLayout>
