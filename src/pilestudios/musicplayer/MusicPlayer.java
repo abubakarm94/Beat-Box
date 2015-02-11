@@ -410,28 +410,9 @@ public class MusicPlayer extends Activity implements OnCompletionListener,
 
 			@Override
 			public void onClick(View arg0) {
-				if (isShuffle) {
-					isShuffle = false;
-					Toast.makeText(getApplicationContext(), "Shuffle is OFF",
-							Toast.LENGTH_SHORT).show();
-					btnShuffle.setBackground(getResources().getDrawable(
-							R.drawable.green_button_pressed));
-					btnShuffle.setTextColor(Color.parseColor("#FF3262"));
-					editor.putBoolean("shuffleState", isShuffle);
-					editor.commit();
-
-				} else { // make repeat to true
-					isShuffle = true;
-					Toast.makeText(getApplicationContext(), "Shuffle is ON",
-							Toast.LENGTH_SHORT).show(); // make shuffle to false
-														// isRepeat =false;
-					btnShuffle.setBackground(getResources().getDrawable(
-							R.drawable.green_button_depressed));
-					btnShuffle.setTextColor(Color.parseColor("#ffffff"));
-					editor.putBoolean("shuffleState", isShuffle);
-					editor.commit();
-
-				}
+				Toast.makeText(getApplicationContext(),
+						"This feature will be available in the next update",
+						Toast.LENGTH_LONG).show();
 			}
 		});
 
@@ -463,12 +444,7 @@ public class MusicPlayer extends Activity implements OnCompletionListener,
 
 		}
 
-		if (isShuffle) {
-			btnShuffle.setBackground(getResources().getDrawable(
-					R.drawable.green_button_depressed));
-			btnShuffle.setTextColor(Color.parseColor("#ffffff"));
-
-		}
+		
 
 	}
 	

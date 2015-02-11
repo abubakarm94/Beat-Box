@@ -25,6 +25,15 @@ public class Photo extends ParseObject {
 		return this;
 	}
 	
+	//sets the total space the user has
+	public void setTotalSpace(Number amount){
+		put("totalSpace", amount);
+	}
+	
+	public Number getTotalSpace(){
+		return ParseUser.getCurrentUser().getNumber("totalSpace");
+	}
+	
 	public Number getUploadCount(){
 		return ParseUser.getCurrentUser().getNumber("uploadCount");
 	}

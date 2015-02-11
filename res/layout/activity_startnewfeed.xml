@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF795B" >
+    android:background="#000000" >
 
     <LinearLayout
        
@@ -14,15 +14,10 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/temp"
+            android:src="@drawable/ic_launcher"
             android:paddingBottom="20dp" />
         
-        <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-       android:max="100" />
+    
         
       
     </LinearLayout>

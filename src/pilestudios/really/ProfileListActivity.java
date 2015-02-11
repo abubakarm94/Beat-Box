@@ -67,6 +67,7 @@ import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import pilestudios.async.globalData;
 import pilestudios.friends.friends;
 import pilestudios.musicplayer.Playlist;
 import pilestudios.musicplayer.PlaylistSelector;
@@ -90,6 +91,7 @@ public class ProfileListActivity extends ListActivity implements OnClickListener
 	private final int permittedSpace = 250;
 	private TextView usedSpace;
 	private Number usedSize;
+	private globalData gData;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -130,35 +132,11 @@ public class ProfileListActivity extends ListActivity implements OnClickListener
 		
 		//display the space the user is currently using
 		 usedSpace = (TextView)findViewById(R.id.used_space);
-		
-		
-		 user.fetchInBackground(new GetCallback<ParseObject>() {
-		        public void done(ParseObject object, ParseException e) {
-		            if (e == null) {
-		                ParseUser hello = (ParseUser) object;
-		                usedSize= hello.getNumber("usedSpace");
-		        		if(usedSize == null){
-		        			usedSize=0;
-		        		//user.put("usedSpace", 0);
-		        		photo.setUsedSpace(0);
-		        	photo.saveInBackground(new SaveCallback(){
+		 
+		  gData = globalData.getInstance(this);
+ 		usedSpace.setText(gData.getUsedSpace()+"Mb use out of "+gData.getTotalSpace()+"Mb");
 
-						@Override
-						public void done(ParseException arg0) {
-							// TODO Auto-generated method stub
-							Toast.makeText(getApplicationContext(), "completed", 4).show();
-					
-						}
-		        		
-		        	});
-		        		}
-		        		usedSpace.setText(usedSize+"Mb use out of "+permittedSpace+"Mb");
-
-		                // Do stuff with currUser
-		            } else {
-		            } 
-		            
-		        }});
+		
 		
 		final Builder alert = new AlertDialog.Builder(this);
 		
@@ -208,21 +186,25 @@ public class ProfileListActivity extends ListActivity implements OnClickListener
 						setListAdapter(mUserViewAdapter);
 						
 							
-							final int currentSize = ParseUser.getCurrentUser().getNumber("usedSpace").intValue()-songSize;
-							
-							
-							photo.setUsedSpace(currentSize);
-							photo.saveInBackground(new SaveCallback(){
+						//	final int currentSize = ParseUser.getCurrentUser().getNumber("usedSpace").intValue()-songSize;
+						final int currentSize = gData.getUsedSpace()-songSize;
+						
+							final int uploadCount = gData.getUploadCount()-1;
+							ParseUser.getCurrentUser().put("usedSpace", currentSize);
+							ParseUser.getCurrentUser().put("uploadCount", uploadCount);
+							ParseUser.getCurrentUser().saveInBackground(new SaveCallback(){
+
 								@Override
 								public void done(ParseException e) {
 									// TODO Auto-generated method stub
-									usedSpace.setText(currentSize+"Mb used out of "+permittedSpace+"Mb");
+									usedSpace.setText(currentSize+"Mb used out of "+gData.getTotalSpace()+"Mb");
 									if(e == null)
 									Toast.makeText(getApplicationContext(), "Success", 4).show();
 
 								}
-							
+								
 							});
+						
 
 						}
 						 
@@ -422,9 +404,12 @@ public class ProfileListActivity extends ListActivity implements OnClickListener
 
 	private void updateHomeList() {
 
-		usedSpace.setText(usedSize.intValue()+"Mb used out of "+permittedSpace+"Mb");
+	/*	usedSpace.setText(usedSize.intValue()+"Mb used out of "+permittedSpace+"Mb");
 		mUserViewAdapter.loadObjects();
-		setListAdapter(mUserViewAdapter);
+		setListAdapter(mUserViewAdapter);*/
+		Intent  i = new Intent(this, HomeScreen.class);
+		startActivity(i);
+		finish();
 	}
 
 	private void showUser() {

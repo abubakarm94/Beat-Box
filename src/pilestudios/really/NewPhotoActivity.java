@@ -13,6 +13,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
+import pilestudios.async.globalData;
+
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -70,6 +72,7 @@ public class NewPhotoActivity extends Activity implements OnClickListener {
 	// user meets all the requirment.
 	private boolean shouldUpload = true;
 	private Number songCount;
+	private globalData gData;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -129,32 +132,21 @@ public class NewPhotoActivity extends Activity implements OnClickListener {
 					artistName = "Unknown";
 				}
 				fileSize = getFileSize(selectedAudioUri);
-				Number usedSpace = getCurrentPhoto().getUsedSpace();
 				// songCount =getCurrentPhoto().getUploadCount();
+				
+				 gData = globalData.getInstance(this);
+				 int usedSpace = gData.getUsedSpace();
+				
+				 songCount = gData.getUploadCount();
 				 
-				 ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
-				        public void done(ParseObject object, ParseException e) {
-				            if (e == null) {
-				                ParseUser hello = (ParseUser) object;
-				              songCount = hello.getNumber("uploadCount");
-
-				                // Do stuff with currUser
-				            } else {
-				            } 
-				            
-				        }});
-				 
-				if (usedSpace == null) {
-					shouldUpload = true;
-					getCurrentPhoto().setUsedSpace(0);
-				} else if ((usedSpace.intValue() + fileSize) >= 250) {
+			
+				  if ((usedSpace + fileSize) >= gData.getTotalSpace()) {
 					shouldUpload = false;
+				}else{
+					shouldUpload = true;
 				}
 				
-				if(songCount == null){
-					getCurrentPhoto().setUploadCount(0);
-
-				}
+			
 
 				// Toast.makeText(getApplicationContext(), usedSpace.intValue()+"",
 				// 4).show();
@@ -164,11 +156,9 @@ public class NewPhotoActivity extends Activity implements OnClickListener {
 				if (shouldUpload == true) {
 					Bitmap tempUri = getArt(songPath);
 					if (tempUri == null) {
-						Toast.makeText(getApplicationContext(),
-								"is null  " + songPath, 5).show();
+						
 					} else {
-						Toast.makeText(getApplicationContext(), "not null", 5)
-								.show();
+						
 						savePhotoFiles(tempUri, selectedAudioUri);
 
 					}
@@ -457,7 +447,10 @@ public class NewPhotoActivity extends Activity implements OnClickListener {
 					getCurrentPhoto().setImage(image);
 					getCurrentPhoto().setThumbnail(thumbnail);
 					getCurrentPhoto().setSong(song);
-					getCurrentPhoto().setUploadCount((songCount.intValue()+1));
+					//getCurrentPhoto().setUploadCount((songCount.intValue()+1));
+					gData.setUploadCount(1+gData.getUploadCount());
+					ParseUser.getCurrentUser().put("uploadCount",gData.getUploadCount());
+					ParseUser.getCurrentUser().saveInBackground();
 
 					if (publicUpload) {
 						getCurrentPhoto().setVisiblity(publicUpload);
@@ -470,12 +463,11 @@ public class NewPhotoActivity extends Activity implements OnClickListener {
 					getCurrentPhoto().setUser(ParseUser.getCurrentUser());
 					getCurrentPhoto().setSongSize(fileSize);
 
-					Number value = getCurrentPhoto().getUsedSpace();
-					if (value == null) {
-						value = 0;
-					}
-					getCurrentPhoto().setUsedSpace(
-							(value.intValue() + fileSize));
+					gData.setUsedSpace(gData.getUsedSpace()+fileSize);
+					ParseUser.getCurrentUser().put("usedSpace",gData.getUsedSpace());
+					ParseUser.getCurrentUser().saveInBackground();
+					//getCurrentPhoto().setUsedSpace(
+							//(value.intValue() + fileSize));
 					doe();
 
 				}

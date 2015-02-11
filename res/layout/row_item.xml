@@ -30,12 +30,12 @@
     
      <TextView
         android:id="@+id/songAuthor"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ds"
+        android:text="This song has been deleted. Long click to delete."
         android:gravity="bottom"
         android:layout_alignParentBottom="true"
-	
+	android:singleLine="true"
          android:textColor="#454545"
         android:layout_below="@id/songTitle"
         android:layout_toRightOf="@id/playlist_thumbnail"

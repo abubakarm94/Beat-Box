@@ -106,7 +106,102 @@ public class UserViewAdapter extends ParseQueryAdapter<Photo> {
 		 */
 		
 		String name = (String) user.get("displayName");
+		 final String Visibility;
+		//set up whether its public or private
+		 final TextView options = (TextView) v.findViewById(R.id.state);
+		if(photo.getVisiblity() == true){
+		options.setText("Make Private");
+		Visibility = "public";
+		}else{
+			options.setText("Make Public");
+			Visibility = "private";
+
+		}
 		
+		options.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+
+				// set title
+				alertDialogBuilder.setTitle("Set Visibility");
+
+				if(options.getText().toString().equals("Make Public")){
+					alertDialogBuilder.setMessage("Are you sure? Your friends will now be able to see and stream this song");
+				}else{
+					alertDialogBuilder.setMessage("Are you sure? Your friends will no longer be able to see this song");
+
+				}
+				// set dialog message
+				alertDialogBuilder
+
+						.setCancelable(false)
+						.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int id) {
+								// TODO Auto-generated method stub
+								
+							}
+							
+						})
+						.setPositiveButton("Yes",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog, int id) {
+										// if this button is clicked, close
+										// current activity
+										// MainActivity.this.finish();
+										//finish();
+										if(options.getText().toString().equals("Make Private")){
+											photo.setVisiblity(false);
+											
+											photo.saveInBackground(new SaveCallback(){
+
+												@Override
+												public void done(
+														ParseException e) {
+													// TODO Auto-generated method stub
+													if(e == null)
+													options.setText("Make Public");
+													//
+
+												}
+												
+											});
+											//Toast.makeText(getContext(), "now public", 3).show();
+
+
+										}else{
+											photo.setVisiblity(true);
+											photo.saveInBackground(new SaveCallback(){
+
+												@Override
+												public void done(
+														ParseException e) {
+													// TODO Auto-generated method stub
+													if(e == null)
+													options.setText("Make Private");
+
+												}
+												
+											});
+											//Toast.makeText(getContext(), "now private", 3).show();
+
+										}
+									}
+								});
+						
+
+				// create alert dialog
+				AlertDialog alertDialog = alertDialogBuilder.create();
+
+				// show it
+				alertDialog.show();
+			}
+			
+		});
 		
 
 		// Set up the username

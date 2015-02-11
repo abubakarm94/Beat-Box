@@ -93,6 +93,8 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 		setListAdapter(mHomeViewAdapter);
 		
 		
+		
+		
 		//
 
 
@@ -271,8 +273,12 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 
 	private void updateHomeList() {
 
-		mHomeViewAdapter.loadObjects();
-		setListAdapter(mHomeViewAdapter);
+	//	mHomeViewAdapter.loadObjects();
+		
+		//setListAdapter(mHomeViewAdapter);
+		Intent  i = new Intent(this, HomeScreen.class);
+		startActivity(i);
+		finish();
 	}
 
 

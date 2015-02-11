@@ -22,6 +22,11 @@ public class Playlist extends ParseObject {
 	public Playlist() {
 		// A default constructor is required.
 	}
+	
+	public ParseObject getObject(){
+		return this;
+	}
+	
 
 	//get the playlist name
 	public String getPlaylistName() {

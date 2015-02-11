@@ -5,6 +5,7 @@ package pilestudios.musicplayer;
 
 import java.util.Arrays;
 
+import pilestudios.async.globalData;
 import pilestudios.really.Photo;
 import pilestudios.really.R;
 import pilestudios.really.startApplication;
@@ -35,8 +36,9 @@ public class playlistAdapter extends ParseQueryAdapter<Playlist> {
 		super(context, new playlistAdapter.QueryFactory<Playlist>() {
 			public ParseQuery<Playlist> create() {
 
-				// instantiate for the playlist service
 				playlistService s = playlistService.getInstance();
+		/*		// instantiate for the playlist service
+				
 
 				// gets the parse user
 				ParseUser user = ParseUser.getCurrentUser();
@@ -46,8 +48,16 @@ public class playlistAdapter extends ParseQueryAdapter<Playlist> {
 						"Playlist");
 				songs.whereMatches("playlistName", s.getSelectedPlaylist());
 				songs.whereExists("song");
+				
 				songs.whereEqualTo("user", user);
-				songs.include("song");
+				songs.include("objectId");
+
+				songs.include("song");*/
+				
+				//get the playlist data from globalData class to save time you can also get it from using the code above
+				globalData gData = globalData.getInstance(context);
+				ParseQuery<Playlist> songs = gData.getPlaylistQuery();
+				songs.whereMatches("playlistName", s.getSelectedPlaylist());
 
 				
 				return songs;

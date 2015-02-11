@@ -41,6 +41,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
 import android.os.Build;
 
 public class LoginActivity extends Activity {
@@ -60,6 +61,14 @@ Parse.initialize(this, "KOeI8CM7z0yeH5ZBa7MoEhG5YQjGipkkBO6oFAUV", "U7jVsWxDzgOe
 		
 		// Set your Facebook App Id in strings.xml
 		ParseFacebookUtils.initialize(getString(R.string.app_id));
+		
+		
+		 TextView back = (TextView)findViewById(R.id.statusbar_back);
+		 back.setVisibility(View.GONE);
+		 
+		 TextView nowPlaying = (TextView)findViewById(R.id.nowPlaying);
+		 nowPlaying.setVisibility(View.GONE);
+		 
 	/*	
 		
 		PackageInfo info;

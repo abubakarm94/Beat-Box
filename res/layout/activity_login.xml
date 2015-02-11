@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"  >
@@ -7,21 +7,38 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        
+      android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:padding="10dp"
         android:gravity="center_horizontal"
-        android:text="@string/login_intro"
-        android:textSize="18sp" />
+        android:text="Back up your songs while giving your friends the power to stream music from your collection"
+        android:textSize="15sp" />
     
+        <TextView
+            android:id="@+id/banner"
+            android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:text="We will never post anything on your Facebook wall"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_marginTop="100dp"
+        android:layout_above="@id/banner"
         android:text="@string/login"
+        android:layout_centerHorizontal="true"
         android:textColor="#fff"
-        android:layout_gravity="center_horizontal"
         android:background="@drawable/button_login"
         />
     
-</LinearLayout>
+    
+    
+</RelativeLayout>

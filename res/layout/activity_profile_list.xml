@@ -5,16 +5,17 @@
                       android:background="#DDDEE3"
          android:paddingTop="8dp"
          android:layout_height="match_parent"
-         android:paddingLeft="8dp"
+      
                            android:descendantFocusability="blocksDescendants"
-         
-         android:paddingRight="8dp">
+     >
          
      
      <RelativeLayout
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
-         android:layout_weight="0.3"
+       android:paddingTop="10dp"
+         
+         android:paddingRight="8dp"
          android:background="#ffffff"
                     android:layout_marginBottom="10dp"
         android:paddingLeft="10dp"
@@ -24,7 +25,7 @@
          <ImageView 
              android:layout_width="75dp"
              android:layout_height="75dp"
-             android:layout_centerInParent="true"
+             android:layout_centerHorizontal="true"
              android:background="#DDDEE3"
              android:id="@+id/profile_picture"
             android:layout_marginBottom="10dp"
@@ -34,7 +35,9 @@
          <TextView 
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="Free Space"
+             android:text=""
+                          android:layout_centerHorizontal="true"
+             
              android:singleLine="true"
              android:id="@+id/used_space"
              android:gravity="center"
@@ -48,7 +51,7 @@
          <TextView 
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
-             android:text="User Name"
+             android:text=""
              android:singleLine="true"
              android:id="@+id/profile_name"
              
@@ -64,13 +67,17 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:background="#FFFFFF"
-               android:text="@string/no_data"
+                   android:textStyle="bold"
+               android:gravity="center"
+               android:text="No new activity! \n Have you backed up any song?"
                android:paddingBottom="50dp"
                />
 
      <ListView android:id="@android:id/list"
                android:layout_width="match_parent"
                android:layout_height="0dip"
+                      android:paddingLeft="8dp"
+         android:paddingRight="8dp"
                android:background="#FFFFFF"
                android:layout_weight="1"
                 android:divider="#E3E4DE"
@@ -86,6 +93,11 @@
              android:layout_height="wrap_content"
              android:gravity="bottom"
              android:background="#F2F2F2"
+             android:paddingTop="6dp"
+             android:paddingLeft="6dp"
+             android:paddingRight="6dp"  
+                          android:layout_alignParentBottom="true"
+             
            android:baselineAligned="true"
              >
              <TextView 

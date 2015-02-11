@@ -40,6 +40,7 @@ import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import pilestudios.async.globalData;
 import pilestudios.musicplayer.MusicPlayer;
 import pilestudios.musicplayer.MusicService;
 import pilestudios.musicplayer.Playlist;
@@ -54,11 +55,11 @@ import pilestudios.really.R;
 public class HomeViewAdapter extends ParseQueryAdapter<Photo> {
 	private MediaPlayer mediaPlayer = new MediaPlayer();
 
-	public HomeViewAdapter(Context context) {
+	public HomeViewAdapter(final Context context) {
 		super(context, new ParseQueryAdapter.QueryFactory<Photo>() {
 			public ParseQuery<Photo> create() {
 				
-				// First, query for the friends whom the current user follows
+			/*	// First, query for the friends whom the current user follows
 				ParseQuery<pilestudios.really.Activity> followingActivitiesQuery = new ParseQuery<pilestudios.really.Activity>("Activity");
 				followingActivitiesQuery.setLimit(4);
 				followingActivitiesQuery.whereMatches("type", "follow");
@@ -87,7 +88,9 @@ public class HomeViewAdapter extends ParseQueryAdapter<Photo> {
 				query.include("user");
 				query.orderByDescending("createdAt");
 			
-				//query.setLimit(0); not working yet
+				//query.setLimit(0); not working yet*/
+				globalData gData = globalData.getInstance(context);
+				ParseQuery<Photo> query = gData.getNewsFeedQuery();
 
 				return query;
 			}
