@@ -19,6 +19,8 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    
+    <uses-permission android:name="com.android.vending.BILLING" />
 
     <permission
         android:name="pilestudios.really.permission.C2D_MESSAGE"
@@ -87,30 +89,24 @@
             android:name="pilestudios.async.startNewFeeds"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        <activity
-            android:name="pilestudios.musicplayer.MusicPlayer"
-      >
+        <activity android:name="pilestudios.musicplayer.MusicPlayer" >
         </activity>
         <activity android:name="pilestudios.friends.friends" >
         </activity>
-        <activity
-            android:name="pilestudios.musicplayer.PlaylistSelector"
-           >
+        <activity android:name="pilestudios.musicplayer.PlaylistSelector" >
         </activity>
         <activity android:name="pilestudios.musicplayer.PlaylistContent" >
         </activity>
-        <activity
-            android:name="pilestudios.musicplayer.playlistMusicPlayer"
-      >
+        <activity android:name="pilestudios.musicplayer.playlistMusicPlayer" >
         </activity>
         <activity android:name="HomeScreen" >
-            
         </activity>
-        
         <activity android:name="ProfileListActivity" >
         </activity>
-        <activity android:name="pilestudios.friends.FriendsViewSongs"></activity>
-        
+        <activity android:name="pilestudios.friends.FriendsViewSongs" >
+        </activity>
+        <activity android:name="pilestudios.beatbox.more.more" >
+        </activity>
     </application>
 
 </manifest>

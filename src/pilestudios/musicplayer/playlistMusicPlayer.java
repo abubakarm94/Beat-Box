@@ -224,13 +224,13 @@ public class playlistMusicPlayer extends Activity implements
 			if (songsList.get(currentSongIndex).getSongTitle()
 					.equals(songService.songTitle)) {
 				continueSong(currentSongIndex);
-				Toast.makeText(getApplicationContext(), "continue", 4).show();
+			//	Toast.makeText(getApplicationContext(), "continue", 4).show();
 			} else {
 				// songService.stopSong();
 				songService.mp.stop();
 				playSong(currentSongIndex);
-				Toast.makeText(getApplicationContext(), "don't continue", 4)
-						.show();
+				//Toast.makeText(getApplicationContext(), "don't continue", 4)
+					//	.show();
 			}
 
 		} else { // if not song from playlist is playing in the backgroudn
@@ -350,8 +350,8 @@ public class playlistMusicPlayer extends Activity implements
 				if (mp.isPlaying()) {
 					if (mp != null) {
 						mp.pause();
-						// Changing button image to play button
 						isPause = true;
+						// Changing button image to play button
 						btnPlay.setImageResource(R.drawable.ic_play);
 					}
 				} else {
@@ -665,18 +665,14 @@ public class playlistMusicPlayer extends Activity implements
 
 	public void onBackPressed() {
 		// moveTaskToBack (true);
-		if (mp.isPlaying() == true) {
-			canGoBack = true;
-		}
-
-		if (canGoBack == true) {
+	if(mp.isPlaying() || isPause){
 			mHandler.removeCallbacks(mUpdateTimeTask);
 
 			finish();
-		} else {
-			Toast.makeText(getApplicationContext(),
-					"Please wait until the song finishes loading", 3).show();
-		}
+	}else{
+		Toast.makeText(this, "Please wait till the song finished loading", 6).show();
+	}
+			
 
 	}
 
@@ -899,8 +895,13 @@ public class playlistMusicPlayer extends Activity implements
 	@Override
 	public void onStartTrackingTouch(SeekBar seekBar) {
 		// remove message Handler from updating progress bar
-		mHandler.removeCallbacks(mUpdateTimeTask);
-	}
+		if(mp.isPlaying() || isPause){
+			mHandler.removeCallbacks(mUpdateTimeTask);
+
+			finish();
+	}else{
+		Toast.makeText(this, "Please wait till the song finished loading", 6).show();
+	}	}
 
 	/**
 	 * When user stops moving the progress hanlder

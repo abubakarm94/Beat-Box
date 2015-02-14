@@ -68,6 +68,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import pilestudios.async.globalData;
+import pilestudios.beatbox.more.more;
 import pilestudios.friends.friends;
 import pilestudios.musicplayer.Playlist;
 import pilestudios.musicplayer.PlaylistSelector;
@@ -198,8 +199,8 @@ public class ProfileListActivity extends ListActivity implements OnClickListener
 								public void done(ParseException e) {
 									// TODO Auto-generated method stub
 									usedSpace.setText(currentSize+"Mb used out of "+gData.getTotalSpace()+"Mb");
-									if(e == null)
-									Toast.makeText(getApplicationContext(), "Success", 4).show();
+								//	if(e == null)
+								//	Toast.makeText(getApplicationContext(), "Success", 4).show();
 
 								}
 								
@@ -364,43 +365,13 @@ public class ProfileListActivity extends ListActivity implements OnClickListener
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_home_menu, menu);
-		return true;
-	}
 
 
 	/*
 	 * Posting pictures and refreshing the list will be controlled from the
 	 * Action Bar.
 	 */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
 
-		case R.id.action_refresh: {
-			updateHomeList();
-			break;
-		}
-
-		case R.id.action_person: {
-			showUser();
-			break;
-		}
-
-		case R.id.action_new: {
-			newPhoto();
-			break;
-		}
-
-		case R.id.logout: {
-			onLogoutButtonClicked();
-			break;
-		}
-		}
-		return super.onOptionsItemSelected(item);
-	}
 
 	private void updateHomeList() {
 
@@ -684,8 +655,9 @@ public class ProfileListActivity extends ListActivity implements OnClickListener
 			updateHomeList();
 			break;
 		case R.id.logout_button:
-			onLogoutButtonClicked();
-
+			//onLogoutButtonClicked();
+			Intent b = new Intent(this, more.class);
+			startActivity(b);
 			break;
 
 		case R.id.playlist_button:

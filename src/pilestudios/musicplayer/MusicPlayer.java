@@ -118,7 +118,13 @@ public class MusicPlayer extends Activity implements OnCompletionListener,
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				finish();
+				if(mp.isPlaying() || isPause){
+					mHandler.removeCallbacks(mUpdateTimeTask);
+
+					finish();
+			}else{
+				Toast.makeText(getApplicationContext(), "Please wait till the song finished loading", 6).show();
+			}
 
 			}
 
@@ -479,16 +485,13 @@ public class MusicPlayer extends Activity implements OnCompletionListener,
 		// moveTaskToBack (true);
 
 		//remove the seekbar runnable callbacks
-		if(mp.isPlaying() == true){
+		if(mp.isPlaying() || isPause){
+			mHandler.removeCallbacks(mUpdateTimeTask);
 
-		mHandler.removeCallbacks(mUpdateTimeTask); //must. its important
-
-		//finish this activity
-		finish();
-		}else{
-			Toast.makeText(getApplicationContext(), "Please wait until the song finishes loading", 3).show();
-
-		}
+			finish();
+	}else{
+		Toast.makeText(this, "Please wait till the song finished loading", 6).show();
+	}
 	}
 
 	// after the activity has finished displaying its contents

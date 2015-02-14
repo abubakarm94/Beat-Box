@@ -15,7 +15,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:background="#FFFFFF"
-               android:text="Hold on, we're working on it"
+               android:text="Loading... Invite your friends to Beat Box"
                android:textStyle="bold"
                android:gravity="center"
                android:paddingBottom="50dp"

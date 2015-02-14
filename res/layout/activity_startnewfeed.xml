@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000" >
+    android:background="#A2CFDB" >
 
     <LinearLayout
        
@@ -14,14 +14,24 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/ic_start"
             android:paddingBottom="20dp" />
         
     
         
       
     </LinearLayout>
-
+<TextView
+      android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:textColor="#ffffff"
+        android:textStyle="bold"
+        android:padding="15dp"
+        android:singleLine="true"
+    android:text="Beat Box relies on strong internet connection"
+     />
     
 
 </RelativeLayout>

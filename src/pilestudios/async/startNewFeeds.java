@@ -83,8 +83,9 @@ public class startNewFeeds extends Activity implements Runnable {
 
 			  gData = globalData.getInstance(this);
 			  getData();
+			
 			  
-			  setNewsFeedQuery();
+			//  setNewsFeedQuery();
 			  
 			  setPlaylistQuery();
 			  
@@ -141,39 +142,6 @@ public class startNewFeeds extends Activity implements Runnable {
 	}
 	
 	
-	public void setNewsFeedQuery(){
-
-		// First, query for the friends whom the current user follows
-		ParseQuery<pilestudios.really.Activity> followingActivitiesQuery = new ParseQuery<pilestudios.really.Activity>("Activity");
-		followingActivitiesQuery.setLimit(4);
-		followingActivitiesQuery.whereMatches("type", "follow");
-		
-		followingActivitiesQuery.whereEqualTo("fromUser", ParseUser.getCurrentUser());
-		
-		// Get the photos from the Users returned in the previous query
-		ParseQuery<Photo> photosFromFollowedUsersQuery = new ParseQuery<Photo>("Photo");
-		photosFromFollowedUsersQuery.whereMatchesKeyInQuery("user", "toUser", followingActivitiesQuery);
-		photosFromFollowedUsersQuery.whereExists("image");
-		photosFromFollowedUsersQuery.whereEqualTo("visibility",true);
-
-		
-		// Get the current user's photos
-		ParseQuery<Photo> photosFromCurrentUserQuery = new ParseQuery<Photo>("Photo");
-		photosFromCurrentUserQuery.whereEqualTo("user", ParseUser.getCurrentUser());
-		photosFromCurrentUserQuery.whereExists("image");
-		//photosFromCurrentUserQuery.setLimit(10);
-		//photosFromCurrentUserQuery.whereEqualTo("visibility", true);
-
-		// We create a final compound query that will find all of the photos that were
-	    // taken by the user's friends or by the user
-		ParseQuery<Photo> query = ParseQuery.or(Arrays.asList( photosFromFollowedUsersQuery, photosFromCurrentUserQuery ));
-		
-		
-		query.include("user");
-		query.orderByDescending("createdAt");
-		
-		gData.setNewsFeedQuery(query);
-	}
 	
 	public void getData(){
 		 user.fetchInBackground(new GetCallback<ParseObject>() {

@@ -12,9 +12,10 @@
         android:id="@+id/photo"
         android:layout_width="86dp"
         android:layout_height="76dp"
+            android:background="@null"
+        
         android:layout_margin="5dip"
         android:adjustViewBounds="true"
-        android:background="@drawable/temp"
         android:paddingLeft="3dip"
         android:paddingRight="3dip" />
 

@@ -16,6 +16,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import pilestudios.beatbox.more.more;
 import pilestudios.musicplayer.MusicPlayer;
 import pilestudios.musicplayer.MusicService;
 import pilestudios.musicplayer.PlaylistContent;
@@ -204,8 +205,9 @@ public class friends extends ListActivity implements OnClickListener{
 			updateHomeList();
 			break;
 		case R.id.logout_button:
-			onLogoutButtonClicked();
-
+		//	onLogoutButtonClicked();
+			Intent b = new Intent(this, more.class);
+			startActivity(b);
 			break;
 
 		case R.id.playlist_button:

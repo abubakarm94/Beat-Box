@@ -11,6 +11,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import pilestudios.beatbox.more.more;
 import pilestudios.friends.friends;
 import pilestudios.really.HomeScreen;
 import pilestudios.really.LoginActivity;
@@ -257,8 +258,9 @@ public class PlaylistContent extends ListActivity implements OnClickListener {
 			updateHomeList();
 			break;
 		case R.id.logout_button:
-			onLogoutButtonClicked();
-
+			//onLogoutButtonClicked();
+			Intent b = new Intent(this, more.class);
+			startActivity(b);
 			break;
 
 		case R.id.playlist_button:

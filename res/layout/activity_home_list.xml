@@ -15,7 +15,7 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:background="#FFFFFF"
-               android:text="No new activity! \n Invite your friends to Beat Box!"
+               android:text="There might not be any new activity! \n Invite your friends to Beat Box!"
                android:textStyle="bold"
                android:gravity="center"
                 android:paddingLeft="8dp"

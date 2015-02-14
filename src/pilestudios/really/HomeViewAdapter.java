@@ -59,7 +59,7 @@ public class HomeViewAdapter extends ParseQueryAdapter<Photo> {
 		super(context, new ParseQueryAdapter.QueryFactory<Photo>() {
 			public ParseQuery<Photo> create() {
 				
-			/*	// First, query for the friends whom the current user follows
+				// First, query for the friends whom the current user follows
 				ParseQuery<pilestudios.really.Activity> followingActivitiesQuery = new ParseQuery<pilestudios.really.Activity>("Activity");
 				followingActivitiesQuery.setLimit(4);
 				followingActivitiesQuery.whereMatches("type", "follow");
@@ -88,9 +88,8 @@ public class HomeViewAdapter extends ParseQueryAdapter<Photo> {
 				query.include("user");
 				query.orderByDescending("createdAt");
 			
-				//query.setLimit(0); not working yet*/
-				globalData gData = globalData.getInstance(context);
-				ParseQuery<Photo> query = gData.getNewsFeedQuery();
+				//query.setLimit(0); not working yet
+			
 
 				return query;
 			}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#BCE0EB"
+     >
+
+    <TextView
+        android:id="@+id/faq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/ic_next"
+        android:paddingBottom="6dp"
+        android:paddingLeft="13dp"
+        android:textColor="#ffffff"
+        android:paddingTop="15dp"
+        android:text="F.A.Q" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/faq"
+        android:background="#666666" />
+
+    <TextView
+        android:id="@+id/buyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/faq"
+        android:drawableRight="@drawable/ic_next"
+        android:textColor="#D61E34"
+        android:paddingBottom="6dp"
+        android:paddingLeft="13dp"
+        android:paddingTop="6dp"
+        android:text="Buy an extra gigabyte of storage"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/buyButton"
+        android:background="#666666" />
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:drawableLeft="@drawable/ic_logout"
+        android:drawablePadding="6dp"
+        android:drawableRight="@drawable/ic_next"
+        android:paddingBottom="13dp"
+        android:textColor="#D61E34"
+        
+        android:paddingLeft="13dp"
+        android:paddingTop="6dp"
+        android:text="Log Out" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/logout"
+        android:background="#666666" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/line"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:text="Email admin@pilestudios.com with concerns and suggestions" 
+        
+                android:scrollHorizontally="true"
+          android:ellipsize="marquee"
+        android:marqueeRepeatLimit ="marquee_forever"
+        
+        />
+
+</RelativeLayout>

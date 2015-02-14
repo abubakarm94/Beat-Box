@@ -58,6 +58,7 @@ import com.parse.ParseQueryAdapter;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import pilestudios.beatbox.more.more;
 import pilestudios.friends.friends;
 import pilestudios.musicplayer.Playlist;
 import pilestudios.musicplayer.PlaylistSelector;
@@ -232,53 +233,14 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_home_menu, menu);
-		return true;
-	}
 
-
-
-	/*
-	 * Posting pictures and refreshing the list will be controlled from the
-	 * Action Bar.
-	 */
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-
-		case R.id.action_refresh: {
-			updateHomeList();
-			break;
-		}
-
-		case R.id.action_person: {
-			//showUser();
-			break;
-		}
-
-		case R.id.action_new: {
-			newPhoto();
-			break;
-		}
-
-		case R.id.logout: {
-			onLogoutButtonClicked();
-			break;
-		}
-		}
-		return super.onOptionsItemSelected(item);
-	}
 
 	private void updateHomeList() {
 
-	//	mHomeViewAdapter.loadObjects();
+		mHomeViewAdapter.loadObjects();
 		
-		//setListAdapter(mHomeViewAdapter);
-		Intent  i = new Intent(this, HomeScreen.class);
-		startActivity(i);
-		finish();
+		setListAdapter(mHomeViewAdapter);
+
 	}
 
 
@@ -549,8 +511,9 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 			updateHomeList();
 			break;
 		case R.id.logout_button:
-			onLogoutButtonClicked();
-
+			//onLogoutButtonClicked();
+			Intent b = new Intent(this, more.class);
+			startActivity(b);
 			break;
 
 		case R.id.playlist_button:

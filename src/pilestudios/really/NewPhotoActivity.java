@@ -117,7 +117,7 @@ public class NewPhotoActivity extends Activity implements OnClickListener {
 		if (resultCode == RESULT_OK) {
 
 			if (requestCode == SELECT_AUDIO) {
-				setContentView(R.layout.fragment_new_photo);
+			//	setContentView(R.layout.fragment_new_photo);
 
 				System.out.println("SELECT_AUDIO");
 				selectedAudioUri = data.getData();
@@ -169,6 +169,8 @@ public class NewPhotoActivity extends Activity implements OnClickListener {
 
 				}
 			}
+			Toast.makeText(getApplicationContext(), "Uploading!", Toast.LENGTH_LONG).show();
+			finish();
 
 		}
 	}
@@ -487,9 +489,9 @@ public class NewPhotoActivity extends Activity implements OnClickListener {
 				if (e == null) {
 					// setResult(Activity.RESULT_OK);
 					// finish();
-					Toast.makeText(getApplicationContext(), "success", 5)
+					Toast.makeText(getApplicationContext(), "Sucess", 5)
 							.show();
-					finish();
+					//finish();
 
 				} else {
 					Toast.makeText(getApplicationContext(),
