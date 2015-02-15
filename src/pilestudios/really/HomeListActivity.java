@@ -431,14 +431,15 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 													// you too MIGHT HAVE
 													// PROBLEMS cause it wasn't
 													// there beofre
-													followActivity
+													pilestudios.really.Activity followFriend = new pilestudios.really.Activity();
+													followFriend
 															.setFromUser(friend);
-													followActivity
+													followFriend
 															.setToUser(currentUser);
-													followActivity
+													followFriend
 															.setType("follow");
-													followActivity
-															.saveEventually();
+													followFriend.saveInBackground();
+															
 
 												}
 												currentUser

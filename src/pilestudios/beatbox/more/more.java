@@ -34,7 +34,8 @@ public class more extends Activity implements OnClickListener {
 	private TextView nowPlaying, logout, faq, buyCredit;
 
 	private IabHelper mHelper;
-private String buyId ="android.test.purchased";
+private String buyId ="extra_gigabyte";
+//android.test.purchased
 	private boolean mBillingServiceReady;
 
 	@Override
@@ -245,7 +246,8 @@ private String buyId ="android.test.purchased";
 
 		case R.id.faq:
 
-			Toast.makeText(getApplicationContext(), "faq", 4).show();
+		Intent i = new Intent(this,faq.class);
+		startActivity(i);
 			break;
 
 		case R.id.buyButton:

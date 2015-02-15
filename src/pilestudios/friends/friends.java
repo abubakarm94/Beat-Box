@@ -83,7 +83,7 @@ public class friends extends ListActivity implements OnClickListener{
 		 
 		 //sets the title bar banner to followers
 		 TextView statusBarTitle = (TextView) findViewById(R.id.statusbar_title);
-		 statusBarTitle.setText("Followers");
+		 statusBarTitle.setText("Following");
 		 
 		 //instantiates now playing text on titlebar
 		 nowPlaying = (TextView)findViewById(R.id.nowPlaying);

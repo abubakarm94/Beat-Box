@@ -163,10 +163,10 @@ public class startNewFeeds extends Activity implements Runnable {
 						totalSpace = hello.getNumber("totalSpace");
 						if(totalSpace == null){
 							//totalSpace =250;
-							user.put("totalSpace", 250);
+							user.put("totalSpace", 100);
 							user.saveInBackground();
 							//song.setTotalSpace(0);
-							totalSpace =250;
+							totalSpace =100;
 
 						}
 						

@@ -30,7 +30,7 @@
         android:textStyle="bold"
         android:padding="15dp"
         android:singleLine="true"
-    android:text="Beat Box relies on strong internet connection"
+    android:text="Music Box relies on strong internet connection"
      />
     
 

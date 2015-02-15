@@ -9,6 +9,7 @@
     <ImageView
         android:id="@+id/photo"
         android:layout_width="86dp"
+        android:background="@null"
         android:layout_height="76dp"
         android:layout_margin="5dp"
         android:adjustViewBounds="true"
