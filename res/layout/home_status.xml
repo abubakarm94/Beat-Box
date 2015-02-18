@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Music Box"
+        android:text="Beat Box"
         android:id="@+id/statusbar_title"
         android:textColor="#F7F7F7"
         android:textStyle="bold"

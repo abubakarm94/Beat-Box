@@ -19,7 +19,7 @@ import pilestudios.beatbox.more.more;
 import pilestudios.friends.friends;
 import pilestudios.really.HomeScreen;
 import pilestudios.really.LoginActivity;
-import pilestudios.really.NewPhotoActivity;
+import pilestudios.really.NewSongActivity;
 import pilestudios.really.R;
 import pilestudios.really.startApplication;
 import android.app.Activity;
@@ -350,7 +350,7 @@ public class PlaylistSelector extends Activity implements OnClickListener {
 
 
 	private void newPhoto() {
-		Intent i = new Intent(this, NewPhotoActivity.class);
+		Intent i = new Intent(this, NewSongActivity.class);
 		startActivityForResult(i, 0);
 	}
 

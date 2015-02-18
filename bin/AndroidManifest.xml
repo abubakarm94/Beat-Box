@@ -43,7 +43,7 @@
             <!-- android:value="android.app.Activity" /> -->
         </activity>
         <activity
-            android:name="pilestudios.really.NewPhotoActivity"
+            android:name="pilestudios.really.NewSongActivity"
             android:label="@string/title_activity_new_photo"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>

@@ -1,5 +1,7 @@
+/* This activity shows user's newsfeed
+ * 
+ */
 package pilestudios.really;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -66,6 +68,7 @@ import pilestudios.musicplayer.playlistAdapter;
 import pilestudios.really.R;
 
 public class HomeListActivity extends ListActivity implements OnClickListener {
+	//required data
 	ListView lv;
 	private HomeViewAdapter mHomeViewAdapter;
 	private List<ParseObject> objects;
@@ -86,56 +89,20 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 		setContentView(R.layout.activity_home_list);
 		
 		lv = getListView();
+		
+		//gets the newsfeed data 
 		mHomeViewAdapter = new HomeViewAdapter(HomeListActivity.this);
 
+		//gets the playlist names on the device
 		preferences = getSharedPreferences("temp",
 				getApplicationContext().MODE_PRIVATE);
 
+		//sets the newsfeed data to listview
 		setListAdapter(mHomeViewAdapter);
 		
 		
 		
-		
-		//
 
-
-	/*
-		final Button newsFeed = (Button) findViewById(R.id.newfeed);
-		final Button profile = (Button) findViewById(R.id.profile_button);
-
-		newsFeed.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				// Toast.makeText(getApplicationContext(), "hello", 6).show();
-				updateHomeList();
-				newsFeed.setBackgroundResource(R.drawable.news_button);
-				profile.setBackgroundResource(R.drawable.profile_notpressed);
-				profile.setTextColor(Color.parseColor("#FF7559"));
-				newsFeed.setTextColor(Color.WHITE);
-				newsFeed.setGravity(Gravity.CENTER_VERTICAL);
-
-			}
-
-		});
-
-		profile.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				showUser();
-				newsFeed.setBackgroundResource(R.drawable.profile_notpressed);
-				profile.setBackgroundResource(R.drawable.newsfeed_notpressed);
-				profile.setTextColor(Color.WHITE);
-				newsFeed.setTextColor(Color.parseColor("#FF7559"));
-				newsFeed.setGravity(Gravity.CENTER_VERTICAL);
-				// FF2B54
-
-			}
-
-		});*/
 
 		TextView upload = (TextView) findViewById(R.id.upload);
 		upload.setOnClickListener(this);
@@ -185,35 +152,6 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 		super.onDestroy();
 	}
 
-	
-
-	private void playMp3(byte[] mp3SoundByteArray) {
-		try {
-			// create temp file that will hold byte array
-			File tempMp3 = File
-					.createTempFile("kurchina", "mp3", getCacheDir());
-			tempMp3.deleteOnExit();
-			FileOutputStream fos = new FileOutputStream(tempMp3);
-			fos.write(mp3SoundByteArray);
-			fos.close();
-
-			// Tried reusing instance of media player
-			// but that resulted in system crashes...
-			mediaPlayer = new MediaPlayer();
-
-			// Tried passing path directly, but kept getting
-			// "Prepare failed.: status=0x1"
-			// so using file descriptor instead
-			FileInputStream fis = new FileInputStream(tempMp3);
-			mediaPlayer.setDataSource(fis.getFD());
-
-			mediaPlayer.prepare();
-			mediaPlayer.start();
-		} catch (IOException ex) {
-			String s = ex.toString();
-			ex.printStackTrace();
-		}
-	}
 
 	@Override
 	public void onResume() {
@@ -244,8 +182,8 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 	}
 
 
-	private void newPhoto() {
-		Intent i = new Intent(this, NewPhotoActivity.class);
+	private void newSong() {
+		Intent i = new Intent(this, NewSongActivity.class);
 		startActivityForResult(i, 0);
 	}
 
@@ -349,6 +287,7 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 
 	}
 
+	//gets the user's profile picture
 	public Bitmap getProfilePic(GraphUser user, ParseUser currentUser) {
 
 		Bitmap userImage = null;
@@ -506,7 +445,7 @@ public class HomeListActivity extends ListActivity implements OnClickListener {
 		// TODO Auto-generated method stub
 		switch (v.getId()) {
 		case R.id.upload:
-			newPhoto();
+			newSong();
 			break;
 		case R.id.refresh:
 			updateHomeList();

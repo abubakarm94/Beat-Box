@@ -26,7 +26,7 @@ import pilestudios.musicplayer.playlistService;
 import pilestudios.really.HomeListActivity;
 import pilestudios.really.HomeScreen;
 import pilestudios.really.LoginActivity;
-import pilestudios.really.NewPhotoActivity;
+import pilestudios.really.NewSongActivity;
 import pilestudios.really.R;
 import pilestudios.really.startApplication;
 import android.app.Activity;
@@ -191,7 +191,7 @@ public class friends extends ListActivity implements OnClickListener{
 
 
 	private void newPhoto() {
-		Intent i = new Intent(this, NewPhotoActivity.class);
+		Intent i = new Intent(this, NewSongActivity.class);
 		startActivityForResult(i, 0);
 	}
 	@Override
@@ -211,11 +211,12 @@ public class friends extends ListActivity implements OnClickListener{
 			break;
 
 		case R.id.playlist_button:
-
+			//start playlist
 			Intent a = new Intent(this, PlaylistSelector.class);
 			startActivity(a);
 			break;
 		case R.id.followers:
+			//start followers
 			Intent i = new Intent(this, friends.class);
 			startActivity(i);
 			break;

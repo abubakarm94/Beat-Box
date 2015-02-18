@@ -48,48 +48,29 @@ public class LoginActivity extends Activity {
 
 	private Button loginButton;
 	private Dialog progressDialog;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 
 		setContentView(R.layout.activity_login);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.home_status);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
+				R.layout.home_status);
 
-Parse.initialize(this, "KOeI8CM7z0yeH5ZBa7MoEhG5YQjGipkkBO6oFAUV", "U7jVsWxDzgOeqFSZCEwzutlbIWhVhiUWJ9ld0Us2");
-		
+		Parse.initialize(this, "YOUR_APPLICATION_ID",
+				"YOUR_CLIENT_KEY");
+
 		// Set your Facebook App Id in strings.xml
-		ParseFacebookUtils.initialize(getString(R.string.app_id));
-		
-		
-		 TextView back = (TextView)findViewById(R.id.statusbar_back);
-		 back.setVisibility(View.GONE);
-		 
-		 TextView nowPlaying = (TextView)findViewById(R.id.nowPlaying);
-		 nowPlaying.setVisibility(View.GONE);
-		 
-	/*	
-		
-		PackageInfo info;
-		try {
-		    info = getPackageManager().getPackageInfo("pilestudios.really", PackageManager.GET_SIGNATURES);
-		    for (Signature signature : info.signatures) {
-		        MessageDigest md;
-		        md = MessageDigest.getInstance("SHA");
-		        md.update(signature.toByteArray());
-		        String something = new String(Base64.encode(md.digest(), 0));
-		        //String something = new String(Base64.encodeBytes(md.digest()));
-		        Log.e("hash key", something);
-		    }
-		} catch (NameNotFoundException e1) {
-		    Log.e("name not found", e1.toString());
-		} catch (NoSuchAlgorithmException e) {
-		    Log.e("no such an algorithm", e.toString());
-		} catch (Exception e) {
-		    Log.e("exception", e.toString());
-		}
-*/
+		ParseFacebookUtils.initialize(("YOUR FACEBOOK APP ID"));
+
+		TextView back = (TextView) findViewById(R.id.statusbar_back);
+		back.setVisibility(View.GONE);
+
+		TextView nowPlaying = (TextView) findViewById(R.id.nowPlaying);
+		nowPlaying.setVisibility(View.GONE);
+
+
 		loginButton = (Button) findViewById(R.id.loginButton);
 		loginButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -98,9 +79,7 @@ Parse.initialize(this, "KOeI8CM7z0yeH5ZBa7MoEhG5YQjGipkkBO6oFAUV", "U7jVsWxDzgOe
 				onLoginButtonClicked();
 			}
 		});
-		
-		
-		
+
 		// Check if there is a currently logged in user
 		// and they are linked to a Facebook account.
 		ParseUser currentUser = ParseUser.getCurrentUser();
@@ -109,44 +88,44 @@ Parse.initialize(this, "KOeI8CM7z0yeH5ZBa7MoEhG5YQjGipkkBO6oFAUV", "U7jVsWxDzgOe
 			getFriends();
 			showHomeListActivity();
 		}
-		
+
 		// For push notifications
 		ParseAnalytics.trackAppOpened(getIntent());
 	}
-	
-	public void getFriends(){
-		Request.executeMyFriendsRequestAsync(ParseFacebookUtils.getSession(), new Request.GraphUserListCallback() {
 
-			
+	public void getFriends() {
+		Request.executeMyFriendsRequestAsync(ParseFacebookUtils.getSession(),
+				new Request.GraphUserListCallback() {
 
-			@Override
-			public void onCompleted(List<GraphUser> users, Response response) {
-				// TODO Auto-generated method stub
-				  if (users != null) {
-				      List<String> friendsList = new ArrayList<String>();
-				      for (GraphUser user : users) {
-				        friendsList.add(user.getId());
-				      }
+					@Override
+					public void onCompleted(List<GraphUser> users,
+							Response response) {
+						// TODO Auto-generated method stub
+						if (users != null) {
+							List<String> friendsList = new ArrayList<String>();
+							for (GraphUser user : users) {
+								friendsList.add(user.getId());
+							}
 
-			        	startApplication globalStatus = (startApplication)getApplicationContext();
-			        	globalStatus.setFriendsList(friendsList);
-			        	
-			        	
+							startApplication globalStatus = (startApplication) getApplicationContext();
+							globalStatus.setFriendsList(friendsList);
 
-				    }
-			}
-			});
+						}
+					}
+				});
 	}
+
 	private void onLoginButtonClicked() {
 		LoginActivity.this.progressDialog = ProgressDialog.show(
 				LoginActivity.this, "", "Logging in...", true);
-		List<String> permissions = Arrays.asList("public_profile","user_about_me","user_friends");
+		List<String> permissions = Arrays.asList("public_profile",
+				"user_about_me", "user_friends");
 		ParseFacebookUtils.logIn(permissions, this, new LogInCallback() {
 			@Override
 			public void done(ParseUser user, ParseException err) {
 				LoginActivity.this.progressDialog.dismiss();
 				if (user == null) {
-					
+
 					Log.i(startApplication.TAG,
 							"Uh oh. The user cancelled the Facebook login.");
 				} else if (user.isNew()) {
@@ -161,30 +140,25 @@ Parse.initialize(this, "KOeI8CM7z0yeH5ZBa7MoEhG5YQjGipkkBO6oFAUV", "U7jVsWxDzgOe
 			}
 		});
 	}
-	
-	
-	
-	
-	
+
 	/**
-	 * Used to provide "single sign-on" for users who don't have the Facebook app installed
+	 * Used to provide "single sign-on" for users who don't have the Facebook
+	 * app installed
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	  super.onActivityResult(requestCode, resultCode, data);
-	  ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+		super.onActivityResult(requestCode, resultCode, data);
+		ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
 	}
-	
+
 	private void showHomeListActivity() {
-		//Log.i(startApplication.TAG, "entered showHomeListActivity");
+		// Log.i(startApplication.TAG, "entered showHomeListActivity");
 		Intent intent = new Intent(this, startNewFeeds.class);
 		startActivity(intent);
 		finish(); // This closes the login screen so it's not on the back stack
 	}
-	
+
 	/***************************************************************************/
-
-
 
 	/**
 	 * A placeholder fragment containing a simple view.

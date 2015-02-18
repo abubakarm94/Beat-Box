@@ -47,7 +47,7 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class NewPhotoActivity extends Activity implements OnClickListener {
+public class NewSongActivity extends Activity implements OnClickListener {
 
 	private static final int SELECT_AUDIO = 2;
 	String selectedPath = "";

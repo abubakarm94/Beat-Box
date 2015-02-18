@@ -1,8 +1,9 @@
 /* This activity is launched by loginActivity 
  * It starts the Homescreen after 2 secs
+ * This activity gets the uploadcout, the total space available, and the usedsize
  * 
  */
-
+//
 package pilestudios.async;
 
 import java.util.Arrays;
@@ -48,7 +49,7 @@ public class startNewFeeds extends Activity implements Runnable {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_startnewfeed);
 
-		// progress bar
+		// Check for internet connection
 
 		if(isNetworkAvailable() == false){
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -78,17 +79,19 @@ public class startNewFeeds extends Activity implements Runnable {
 		alertDialog.show();
 		
 		}else{
+			//if the internet is connected
 			 user = ParseUser.getCurrentUser();
 			  song = new Photo();
 
 			  gData = globalData.getInstance(this);
+			  
+			  //get upload count, usedSize, totalspace
 			  getData();
 			
-			  
-			//  setNewsFeedQuery();
-			  
+			  //gets the song in the user's playlist
 			  setPlaylistQuery();
 			  
+			  //start the homescreen after 2 secs
 		Thread mThread = new Thread(this);
 
 		mThread.start();
@@ -97,6 +100,7 @@ public class startNewFeeds extends Activity implements Runnable {
 		
 	}
 
+	//start homescreen
 	public void run() {
 		try {
 			Thread.sleep(2000);
@@ -121,6 +125,7 @@ public class startNewFeeds extends Activity implements Runnable {
 		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 	
+	
 	public void setPlaylistQuery(){
 		// instantiate for the playlist service
 		playlistService s = playlistService.getInstance();
@@ -142,7 +147,7 @@ public class startNewFeeds extends Activity implements Runnable {
 	}
 	
 	
-	
+	//get upload count, usedsize, totalspace
 	public void getData(){
 		 user.fetchInBackground(new GetCallback<ParseObject>() {
 

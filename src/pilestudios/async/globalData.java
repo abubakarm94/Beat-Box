@@ -55,10 +55,12 @@ public class globalData {
 		return usedSpace;
 	}
 	
+	//returns the number  of songs uploaded
 	public int getUploadCount(){
 		return uploadCount;
 	}
 	
+	//sets the number of songs uploaded
 	public void setUploadCount(int amount){
 		 uploadCount = amount;
 	}

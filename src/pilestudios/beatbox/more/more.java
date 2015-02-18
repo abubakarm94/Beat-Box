@@ -1,3 +1,4 @@
+//This activity is used to log off, get more usage space, launch the frequently asked question
 package pilestudios.beatbox.more;
 
 import com.android.vending.billing.IInAppBillingService;
@@ -34,8 +35,8 @@ public class more extends Activity implements OnClickListener {
 	private TextView nowPlaying, logout, faq, buyCredit;
 
 	private IabHelper mHelper;
-private String buyId ="extra_gigabyte";
-//android.test.purchased
+	private String buyId = "extra_gigabyte";
+	// android.test.purchased
 	private boolean mBillingServiceReady;
 
 	@Override
@@ -47,14 +48,18 @@ private String buyId ="extra_gigabyte";
 		setContentView(R.layout.activity_more);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
 				R.layout.home_status);
-
+		
+		//start the music service instance
 		s = MusicService.getInstance(this);
 
+		//hide the back button on the status bar
 		TextView back = (TextView) findViewById(R.id.statusbar_back);
 		back.setVisibility(View.GONE);
-
+		
+		//start the playlist service instance
 		tempStorage = playlistService.getInstance();
 
+		//if any song if playing from the music service or playlist service and launch accordingly
 		nowPlaying = (TextView) findViewById(R.id.nowPlaying);
 		nowPlaying.setOnClickListener(new OnClickListener() {
 
@@ -72,12 +77,14 @@ private String buyId ="extra_gigabyte";
 
 		});
 
+		//if any song if playing from the music service or playlist service show the now playing service
 		if (tempStorage.isPlaylistPlaying == true || s.isPlaying == true) {
 			nowPlaying.setVisibility(View.VISIBLE);
 		} else {
 			nowPlaying.setVisibility(View.GONE);
 		}
 
+		//this textview is used as button to lauch the faq class, log out and also get more space
 		faq = (TextView) findViewById(R.id.faq);
 		logout = (TextView) findViewById(R.id.logout);
 		buyCredit = (TextView) findViewById(R.id.buyButton);
@@ -85,8 +92,8 @@ private String buyId ="extra_gigabyte";
 		faq.setOnClickListener(this);
 		logout.setOnClickListener(this);
 		buyCredit.setOnClickListener(this);
-		
-		initialiseBilling();
+
+	//	initialiseBilling();
 	}
 
 	@Override
@@ -100,20 +107,19 @@ private String buyId ="extra_gigabyte";
 		}
 		initialiseBilling();
 
-
 	}
 
 	private void initialiseBilling() {
 		if (mHelper != null) {
-			
+
 			return;
 		}
-	
+
 		// Create the helper, passing it our context and the public key to
 		// verify signatures with
 		mHelper = new IabHelper(
 				this,
-				"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAno4qpMs7rU49Z5tOGtvo0rIPQhmwQ1tvNtOlm+OgjOdSVqzt3X3lzvJSfVi90qRc5T1F6D1JGV68ad5EvmHxySfTeXxjlteHu6bulZd1NyMlxbrG0gNjI/Irpuh5ADr5BMJnNigN4zJ4XhRAlGhONaw3EBDBlQNGs5LaO2YjZI5sVnJALPV6sMzJ00asSbDfs6c9pAkJoncysxp99m8E+UqOca2RfmqO7KPyxQ0QZP6d2vF3KFvpZuZKhVUQEHax4fskt2JI4eLZxKmM6cf05kR8Vy77gP8LQns3Asu6cSJQONFAJEGEt0ETkxP5ZrTdk7GSWXHzn35LNJj1fR+PQwIDAQAB");
+				"YOUR BILLING PUBLIC KEY");
 
 		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
 
@@ -137,10 +143,10 @@ private String buyId ="extra_gigabyte";
 				}
 
 				// IAB is fully set up.
-			//	Toast.makeText(more.this, "Thank you for upgrading!",
-					//	Toast.LENGTH_LONG).show();
+				// Toast.makeText(more.this, "Thank you for upgrading!",
+				// Toast.LENGTH_LONG).show();
 				mBillingServiceReady = true;
-				  mHelper.queryInventoryAsync(iabInventoryListener());
+				mHelper.queryInventoryAsync(iabInventoryListener());
 				// Custom function to update UI reflecting their inventory
 				// updateInventoryUI();
 			}
@@ -148,46 +154,46 @@ private String buyId ="extra_gigabyte";
 		});
 
 	}
-	
-	//consume all the purchased item at this point
-	 private IabHelper.QueryInventoryFinishedListener iabInventoryListener() {
-		    return new IabHelper.QueryInventoryFinishedListener() {
-		      @Override
-		      public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
-		        // Have we been disposed of in the meantime? If so, quit.
-		        if (mHelper == null) {
-		          return;
-		        }
 
-		        // Something went wrong
-		        if (!result.isSuccess()) {
+	// consume all the purchased item at this point
+	private IabHelper.QueryInventoryFinishedListener iabInventoryListener() {
+		return new IabHelper.QueryInventoryFinishedListener() {
+			@Override
+			public void onQueryInventoryFinished(IabResult result,
+					Inventory inventory) {
+				// Have we been disposed of in the meantime? If so, quit.
+				if (mHelper == null) {
+					return;
+				}
 
-		          return;
-		        }
-		        
-		        if(inventory.hasPurchase(buyId))
-                {   
-                   //  isItemEnable= true;
-                     mHelper.consumeAsync(inventory.getPurchase(buyId),null);            
-                }
-                else
-                {
-                      // isItemEnable = false;
-                }
+				// Something went wrong
+				if (!result.isSuccess()) {
 
-		        // Do your checks here...
+					return;
+				}
 
-		        // Do we have the premium upgrade?
-		       // Purchase purchasePro = inventory.getPurchase(G.SKU_PRO); // Where G.SKU_PRO is your product ID (eg. permanent.ad_removal)
-		      //  G.settings.isPro = (purchasePro != null && G.verifyDeveloperPayload(purchasePro));
+				if (inventory.hasPurchase(buyId)) {
+					// isItemEnable= true;
+					mHelper.consumeAsync(inventory.getPurchase(buyId), null);
+				} else {
+					// isItemEnable = false;
+				}
 
-		        // After checking inventory, re-jig stuff which the user can access now
-		        // that we've determined what they've purchased
-		       // G.initialiseStuff();
-		      }
-		    };
-		  }
+				// Do your checks here...
 
+				// Do we have the premium upgrade?
+				// Purchase purchasePro = inventory.getPurchase(G.SKU_PRO); //
+				// Where G.SKU_PRO is your product ID (eg. permanent.ad_removal)
+				// G.settings.isPro = (purchasePro != null &&
+				// G.verifyDeveloperPayload(purchasePro));
+
+				// After checking inventory, re-jig stuff which the user can
+				// access now
+				// that we've determined what they've purchased
+				// G.initialiseStuff();
+			}
+		};
+	}
 
 	private void onLogoutButtonClicked() {
 		// close this user's session
@@ -205,36 +211,34 @@ private String buyId ="extra_gigabyte";
 		startActivity(intent);
 		finish();
 	}
+
 	@Override
-	  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (mHelper == null) {
-	      return;
-	    }
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (mHelper == null) {
+			return;
+		}
 
-	    // Pass on the activity result to the helper for handling
-	    if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
-	      // not handled, so handle it ourselves (here's where you'd
-	      // perform any handling of activity results not related to in-app
-	      // billing...
-	      super.onActivityResult(requestCode, resultCode, data);
-	    }
-	  }
+		// Pass on the activity result to the helper for handling
+		if (!mHelper.handleActivityResult(requestCode, resultCode, data)) {
+			// not handled, so handle it ourselves (here's where you'd
+			// perform any handling of activity results not related to in-app
+			// billing...
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+	}
 
+	/**
+	 * Very important
+	 */
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
 
-
-
-	  /**
-	   * Very important
-	   */
-	  @Override
-	  public void onDestroy() {
-	    super.onDestroy();
-
-	    if (mHelper != null) {
-	      mHelper.dispose();
-	      mHelper = null;
-	    }
-	  }
+		if (mHelper != null) {
+			mHelper.dispose();
+			mHelper = null;
+		}
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -246,8 +250,8 @@ private String buyId ="extra_gigabyte";
 
 		case R.id.faq:
 
-		Intent i = new Intent(this,faq.class);
-		startActivity(i);
+			Intent i = new Intent(this, faq.class);
+			startActivity(i);
 			break;
 
 		case R.id.buyButton:
@@ -266,7 +270,8 @@ private String buyId ="extra_gigabyte";
 			// implementation.
 
 			mHelper.launchPurchaseFlow(more.this, buyId, 10001,
-					mPurchaseFinishedListener,"bGoa+V7g/yqDXvKRqq+JTFn4uQZbPiQJo4pf9RzJ");
+					mPurchaseFinishedListener,
+					"bGoa+V7g/yqDXvKRqq+JTFn4uQZbPiQJo4pf9RzJ");
 			break;
 
 		}
@@ -289,7 +294,6 @@ private String buyId ="extra_gigabyte";
 			// Don't complain if cancelling
 
 			if (result.getResponse() == IabHelper.IABHELPER_USER_CANCELLED) {
-		
 
 				return;
 
@@ -297,21 +301,24 @@ private String buyId ="extra_gigabyte";
 
 			if (!result.isSuccess()) {
 
-				//complain("Error purchasing: " + result.getMessage());
-				Toast.makeText(more.this, "Error purchasing: contact the developer",
+				// complain("Error purchasing: " + result.getMessage());
+				Toast.makeText(more.this,
+						"Error purchasing: contact the developer",
 						Toast.LENGTH_LONG).show();
 				return;
 
 			}
 
-		/*	if (!G.verifyDeveloperPayload(purchase)) {
+			/*
+			 * if (!G.verifyDeveloperPayload(purchase)) {
+			 * 
+			 * complain("Error purchasing. Authenticity verification failed.");
+			 * 
+			 * return;
+			 * 
+			 * }
+			 */
 
-				complain("Error purchasing. Authenticity verification failed.");
-
-				return;
-
-			}*/
-		
 			// Purchase was success! Update accordingly
 			if (purchase.getSku().equals(buyId)) {
 
@@ -319,8 +326,8 @@ private String buyId ="extra_gigabyte";
 						Toast.LENGTH_LONG).show();
 				globalData gData = globalData.getInstance(more.this);
 				int temp = gData.getTotalSpace();
-				gData.setTotalSpace(temp+1024);
-				ParseUser.getCurrentUser().put("totalSpace", temp+1024);
+				gData.setTotalSpace(temp + 1024);
+				ParseUser.getCurrentUser().put("totalSpace", temp + 1024);
 				ParseUser.getCurrentUser().saveInBackground();
 
 				// G.settings.isPro = true;
@@ -331,8 +338,6 @@ private String buyId ="extra_gigabyte";
 
 				// updateInventoryUI();
 			}
-
-			
 
 		}
 

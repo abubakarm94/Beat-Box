@@ -389,7 +389,7 @@ public class ProfileListActivity extends ListActivity implements OnClickListener
 	}
 
 	private void newPhoto() {
-		Intent i = new Intent(this, NewPhotoActivity.class);
+		Intent i = new Intent(this, NewSongActivity.class);
 		startActivityForResult(i, 0);
 	}
 

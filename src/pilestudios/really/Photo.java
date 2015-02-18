@@ -4,11 +4,13 @@ import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+//This activity controls the meta data of a song uploaded
+//sets up the artistname, spaceused,songtitle, songfile, etc
 
 /*
  * An extension of ParseObject that makes
  * it more convenient to access information
- * about a given Photo 
+ * about a given Song 
  */
 
 @ParseClassName("Photo")

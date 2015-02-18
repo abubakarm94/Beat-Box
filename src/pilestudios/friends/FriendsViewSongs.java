@@ -15,7 +15,7 @@ import pilestudios.musicplayer.playlistMusicPlayer;
 import pilestudios.musicplayer.playlistService;
 import pilestudios.really.HomeScreen;
 import pilestudios.really.LoginActivity;
-import pilestudios.really.NewPhotoActivity;
+import pilestudios.really.NewSongActivity;
 import pilestudios.really.R;
 import pilestudios.really.R.id;
 import pilestudios.really.R.layout;
@@ -148,7 +148,7 @@ public class FriendsViewSongs extends ListActivity implements OnClickListener {
 
 
 	private void newPhoto() {
-		Intent i = new Intent(this, NewPhotoActivity.class);
+		Intent i = new Intent(this, NewSongActivity.class);
 		startActivityForResult(i, 0);
 	}
 	@Override
